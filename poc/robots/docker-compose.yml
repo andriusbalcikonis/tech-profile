@@ -1,0 +1,16 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./app
+    volumes:
+      - ./app/code:/code
+    ports:
+      - "8063:5000"
+  robots:
+    build:
+      context: ./robots
+    volumes:
+      - ./robots/tests:/home/robot/tests
+      - ./robots/results:/home/robot/results
+    command: tests/smoke_tests

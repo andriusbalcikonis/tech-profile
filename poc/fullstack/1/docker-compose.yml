@@ -1,0 +1,96 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+    volumes:
+      - ./client:/code
+    ports:
+      - "8100:8080"
+    depends_on:
+      - server
+  server:
+    build:
+      context: ./server
+    volumes:
+      - ./server:/code
+    ports:
+      - "8101:5000"
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+      - rabbitmq
+    stdin_open: true
+    tty: true
+  server_checks:
+    build:
+      context: ./server_checks
+    volumes:
+      - ./server:/code
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8102:8081"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+  pgadmin:
+    image: dpage/pgadmin4:4.19
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8103:5050"
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "password"
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: notverysecret
+  redis:
+    image: redis
+  redis-admin:
+    image: marian/rebrow
+    ports:
+      - "8104:5001"
+    depends_on:
+      - redis
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "8105:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+  async-worker:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-async
+    image: &img worker
+    command:
+      [celery, worker, --app=worker.app, --concurrency=2, --loglevel=INFO]
+    depends_on:
+      - async-scheduler
+      - rabbitmq
+    restart: "no"
+    volumes:
+      - ./server:/code
+  async-scheduler:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-async
+    image: *img
+    command: [celery, beat, --app=worker.app, --loglevel=INFO]
+    depends_on:
+      - rabbitmq
+    restart: "no"
+    volumes:
+      - ./server:/code

@@ -1,0 +1,7 @@
+flask
+pymongo
+psycopg2
+sqlalchemy
+redis
+pika
+celery

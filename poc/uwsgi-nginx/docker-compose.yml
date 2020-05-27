@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./web
+    ports:
+      - "8060:80"
+    volumes:
+      - ./web:/code

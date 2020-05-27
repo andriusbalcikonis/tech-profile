@@ -1,0 +1,15 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./web
+    volumes:
+      - ./web:/code
+  locust:
+    image: grubykarol/locust
+    ports:
+      - "8059:8089"
+    environment:
+      ATTACKED_HOST: "http://web:80"
+    volumes:
+      - ./locust:/locust
