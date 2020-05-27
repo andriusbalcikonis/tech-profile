@@ -1,1 +1,1 @@
-# tech-profile
+# tech-profile.
