@@ -1,4 +1,4 @@
-# Python questions
+# Python questions (old notes from when I started learning it)
 
 | #   | Question                                                                                                  |
 | :-- | :-------------------------------------------------------------------------------------------------------- |

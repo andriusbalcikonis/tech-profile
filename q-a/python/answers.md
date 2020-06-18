@@ -1,4 +1,4 @@
-# Python answers
+# Python answers (old notes from when I started learning it)
 
 | #   | Answer                                                              |
 | :-- | :------------------------------------------------------------------ |
