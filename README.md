@@ -47,79 +47,79 @@ System analyst (2005-2007):
 
 ## Technologies
 
-| Category             | Level | Technology           | POC (templates / experiments)  | Notes                              |
-| :------------------- | :---- | :------------------- | :----------------------------- | :--------------------------------- |
-| **FRONTEND**         |       |                      |                                |                                    |
-| Styling              | `**`  | HTML+CSS/SASS        |                                | [Q&A: html&css](q-a/html-css)      |
-|                      | `**`  | Bootstrap            | [bootstrap](poc/bootstrap)     |                                    |
-| Languages            | `**`  | Javascript           |                                | [Q&A: js](q-a/js)                  |
-|                      | `***` | Javascript (ES6)     | (in many POCs)                 | [Q&A: es6](q-a/es6)                |
-|                      | `**`  | Typescript           |                                | [Q&A: typescript](q-a/typescript)  |
-| App frameworks       | `***` | React + Flux/Redux   | [fullstack-1](poc/fullstack/1) |                                    |
-|                      | `*`   | Vue+Vuex `P1`        |                                |                                    |
-| Libraries            | `**`  | jQuery               |                                |                                    |
-|                      | `*`   | RxJS                 |                                |                                    |
-| Tools                | `**`  | Webpack              | [fullstack-1](poc/fullstack/1) |                                    |
-|                      | `**`  | ESLint               |                                |                                    |
-|                      | `**`  | Bower + Grunt/Gulp   |                                |                                    |
-|                      | `**`  | NPM                  |                                |                                    |
-|                      | `*`   | Yarn                 |                                |                                    |
-| Site generators      | `*`   | NextJS               | [nextjs](poc/nextjs)           |                                    |
-| **BACKEND (PYTHON)** |       |                      |                                |                                    |
-| Langauge             | `***` | Python               | (in many POCs)                 | [Q&A: python](q-a/python)          |
-| App frameworks       | `***` | Bottle               |                                |                                    |
-|                      | `**`  | Flask                | [fullstack-1](poc/fullstack/1) |                                    |
-|                      | `*`   | Django               |                                |                                    |
-| ORMs & migration     | `**`  | SqlAlchemy           | [fullstack-1](poc/fullstack/1) |                                    |
-|                      | `*`   | Alembic `P2`         |                                |                                    |
-|                      | `*`   | DjangoORM            |                                |                                    |
-| REST API             | `*`   | FlaskRest            |                                |                                    |
-|                      | `*`   | Schematics `P2`      |                                |                                    |
-|                      | `*`   | DjangoREST           |                                |                                    |
-| GraphQL API          | `*`   | Graphene             |                                |                                    |
-| Async tasks          | `*`   | Celery + RabbitMQ    | [fullstack-1](poc/fullstack/1) |                                    |
-| Queue                | `*`   | pika + RabbitMQ      | [fullstack-1](poc/fullstack/1) |                                    |
-| Web server setup     | `**`  | nginx + uwsgi        | [uwsgi-nginx](poc/uwsgi-nginx) | [Q&A: rev-proxy](q-a/rev-proxy)    |
-| **BACKEND (.NET)**   |       |                      |                                |                                    |
-| .Net                 | `**`  | .Net                 |                                | [Q&A: .net](q-a/dotnet)            |
-|                      | `**`  | C#                   |                                | [Q&A: c#](q-a/csharp)              |
-|                      | `**`  | ASP.Net WebForms     |                                | [Q&A: asp.net wf](q-a/wf)          |
-|                      | `**`  | ASP.Net MVC          |                                | [Q&A: asp.net mvc](q-a/aspmvc)     |
-|                      | `**`  | Entity Framework ORM |                                | [Q&A: ef](q-a/ef)                  |
-|                      | `*`   | Xml                  |                                | [Q&A: xml](q-a/xml)                |
-|                      | `*`   | WCF                  |                                | [Q&A: wcf](q-a/wcf)                |
-|                      | `*`   | IIS                  |                                | [Q&A: iis](q-a/iis)                |
-|                      | `*`   | Active directory     |                                | [Q&A: activedir](q-a/activedir)    |
-|                      | `*`   | .Net Core On Linux   |                                | [Notes: netcore](notes/netcore.md) |
-| **DATABASES**        |       |                      |                                |                                    |
-| Relational           | `*`   | PostgreSQL           | [3dbs](poc/3dbs)               |                                    |
-|                      | `*`   | MySQL                |                                |                                    |
-|                      | `**`  | MS SQL Server        |                                | [Q&A: mssql](q-a/mssql)            |
-| NoSQL                | `**`  | Redis                | [3dbs](poc/3dbs)               |                                    |
-|                      | `*`   | MongoDB              | [3dbs](poc/3dbs)               |                                    |
-|                      | `*`   | Other noSQL DBs      |                                | [Q&A: nosql](q-a/nosql)            |
-| Search engines       | `*`   | Elastic search       |                                |                                    |
-| **OTHER DEV**        |       |                      |                                |                                    |
-| Version control      | `**`  | Git                  |                                | [Notes: git](notes/git.md)         |
-| Selenium tests       | `**`  | Robot framework      | [robots](poc/robots)           |                                    |
-| Authentication       | `**`  | OAuth, JWT           |                                |                                    |
-| Regexp               | `**`  | Regexp               |                                | [Q&A: regexp](q-a/regexp)          |
-| **DEVOPS**           |       |                      |                                |                                    |
-| Tools                | `**`  | Docker               | (in many POCs)                 | [Notes: docker](notes/docker.md)   |
-|                      | `**`  | Docker-compose       | (in many POCs)                 | [Notes: docker](notes/docker.md)   |
-|                      | `*`   | Helm `P2`            |                                |                                    |
-|                      | `**`  | Kubernetes           |                                | [Notes: kubectl](notes/kubectl.md) |
-|                      | `**`  | Bash                 |                                | [Notes: bash](notes/bash.md)       |
-| CI/CD systems        | `***` | GitLab CI            |                                |                                    |
-|                      | `**`  | Jenkins              |                                |                                    |
-|                      | `*`   | Travis CI            |                                |                                    |
-| Monitoring           | `**`  | NewRelic             |                                |                                    |
-|                      | `**`  | Graylog              |                                |                                    |
-|                      | `*`   | Sentry               |                                |                                    |
-|                      | `*`   | Graphana & influxdb  | [grafana](poc/grafana)         |                                    |
-|                      | `*`   | Google analytics     |                                |                                    |
-| Perofmance testing   | `**`  | Locust               | [perf-tests](poc/perf-tests)   |                                    |
-| Operations           | `**`  | Operations           |                                | [Q&A: ops](q-a/ops)                |
+| Category             | Level | Technology           | POC (templates / experiments)  | Notes                                              |
+| :------------------- | :---- | :------------------- | :----------------------------- | :------------------------------------------------- |
+| **FRONTEND**         |       |                      |                                |                                                    |
+| Styling              | `**`  | HTML+CSS/SASS        |                                | [Q&A: html&css](q-a/html-css)                      |
+|                      | `**`  | Bootstrap            | [bootstrap](poc/bootstrap)     |                                                    |
+| Languages            | `**`  | Javascript           |                                | [Q&A: js](q-a/js)                                  |
+|                      | `***` | Javascript (ES6)     | (in many POCs)                 | [Q&A: es6](q-a/es6)                                |
+|                      | `**`  | Typescript           |                                | [Q&A: typescript](q-a/typescript)                  |
+| App frameworks       | `***` | React + Flux/Redux   | [fullstack-1](poc/fullstack/1) |                                                    |
+|                      | `*`   | Vue+Vuex `P1`        |                                |                                                    |
+| Libraries            | `**`  | jQuery               |                                |                                                    |
+|                      | `*`   | RxJS                 |                                |                                                    |
+| Tools                | `**`  | Webpack              | [fullstack-1](poc/fullstack/1) |                                                    |
+|                      | `**`  | ESLint               |                                |                                                    |
+|                      | `**`  | Bower + Grunt/Gulp   |                                |                                                    |
+|                      | `**`  | NPM                  |                                |                                                    |
+|                      | `*`   | Yarn                 |                                |                                                    |
+| Site generators      | `*`   | NextJS               | [nextjs](poc/nextjs)           |                                                    |
+| **BACKEND (PYTHON)** |       |                      |                                |                                                    |
+| Langauge             | `***` | Python               | (in many POCs)                 | Python: [Notes](notes/python.md) [Q&A](q-a/python) |
+| App frameworks       | `***` | Bottle               |                                |                                                    |
+|                      | `**`  | Flask                | [fullstack-1](poc/fullstack/1) |                                                    |
+|                      | `*`   | Django               |                                |                                                    |
+| ORMs & migration     | `**`  | SqlAlchemy           | [fullstack-1](poc/fullstack/1) |                                                    |
+|                      | `*`   | Alembic `P2`         |                                |                                                    |
+|                      | `*`   | DjangoORM            |                                |                                                    |
+| REST API             | `*`   | FlaskRest            |                                |                                                    |
+|                      | `*`   | Schematics `P2`      |                                |                                                    |
+|                      | `*`   | DjangoREST           |                                |                                                    |
+| GraphQL API          | `*`   | Graphene             |                                |                                                    |
+| Async tasks          | `*`   | Celery + RabbitMQ    | [fullstack-1](poc/fullstack/1) |                                                    |
+| Queue                | `*`   | pika + RabbitMQ      | [fullstack-1](poc/fullstack/1) |                                                    |
+| Web server setup     | `**`  | nginx + uwsgi        | [uwsgi-nginx](poc/uwsgi-nginx) | [Q&A: rev-proxy](q-a/rev-proxy)                    |
+| **BACKEND (.NET)**   |       |                      |                                |                                                    |
+| .Net                 | `**`  | .Net                 |                                | [Q&A: .net](q-a/dotnet)                            |
+|                      | `**`  | C#                   |                                | [Q&A: c#](q-a/csharp)                              |
+|                      | `**`  | ASP.Net WebForms     |                                | [Q&A: asp.net wf](q-a/wf)                          |
+|                      | `**`  | ASP.Net MVC          |                                | [Q&A: asp.net mvc](q-a/aspmvc)                     |
+|                      | `**`  | Entity Framework ORM |                                | [Q&A: ef](q-a/ef)                                  |
+|                      | `*`   | Xml                  |                                | [Q&A: xml](q-a/xml)                                |
+|                      | `*`   | WCF                  |                                | [Q&A: wcf](q-a/wcf)                                |
+|                      | `*`   | IIS                  |                                | [Q&A: iis](q-a/iis)                                |
+|                      | `*`   | Active directory     |                                | [Q&A: activedir](q-a/activedir)                    |
+|                      | `*`   | .Net Core On Linux   |                                | [Notes: netcore](notes/netcore.md)                 |
+| **DATABASES**        |       |                      |                                |                                                    |
+| Relational           | `*`   | PostgreSQL           | [3dbs](poc/3dbs)               |                                                    |
+|                      | `*`   | MySQL                |                                |                                                    |
+|                      | `**`  | MS SQL Server        |                                | [Q&A: mssql](q-a/mssql)                            |
+| NoSQL                | `**`  | Redis                | [3dbs](poc/3dbs)               |                                                    |
+|                      | `*`   | MongoDB              | [3dbs](poc/3dbs)               |                                                    |
+|                      | `*`   | Other noSQL DBs      |                                | [Q&A: nosql](q-a/nosql)                            |
+| Search engines       | `*`   | Elastic search       |                                |                                                    |
+| **OTHER DEV**        |       |                      |                                |                                                    |
+| Version control      | `**`  | Git                  |                                | [Notes: git](notes/git.md)                         |
+| Selenium tests       | `**`  | Robot framework      | [robots](poc/robots)           |                                                    |
+| Authentication       | `**`  | OAuth, JWT           |                                |                                                    |
+| Regexp               | `**`  | Regexp               |                                | [Q&A: regexp](q-a/regexp)                          |
+| **DEVOPS**           |       |                      |                                |                                                    |
+| Tools                | `**`  | Docker               | (in many POCs)                 | [Notes: docker](notes/docker.md)                   |
+|                      | `**`  | Docker-compose       | (in many POCs)                 | [Notes: docker](notes/docker.md)                   |
+|                      | `*`   | Helm `P2`            |                                |                                                    |
+|                      | `**`  | Kubernetes           |                                | [Notes: kubectl](notes/kubectl.md)                 |
+|                      | `**`  | Bash                 |                                | [Notes: bash](notes/bash.md)                       |
+| CI/CD systems        | `***` | GitLab CI            |                                |                                                    |
+|                      | `**`  | Jenkins              |                                |                                                    |
+|                      | `*`   | Travis CI            |                                |                                                    |
+| Monitoring           | `**`  | NewRelic             |                                |                                                    |
+|                      | `**`  | Graylog              |                                |                                                    |
+|                      | `*`   | Sentry               |                                |                                                    |
+|                      | `*`   | Graphana & influxdb  | [grafana](poc/grafana)         |                                                    |
+|                      | `*`   | Google analytics     |                                |                                                    |
+| Perofmance testing   | `**`  | Locust               | [perf-tests](poc/perf-tests)   |                                                    |
+| Operations           | `**`  | Operations           |                                | [Q&A: ops](q-a/ops)                                |
 
 Notation:
 
