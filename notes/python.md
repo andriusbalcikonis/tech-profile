@@ -1,4 +1,4 @@
-# Python - notes of things I found interesting
+# Python - notes of things I found interesting (and useful)
 
 ## Notable changes in versions
 
@@ -35,3 +35,32 @@ Q24 here: https://www.interviewbit.com/python-interview-questions/
 ## Nice clear example args and kwargs
 
 Q38 here: https://www.interviewbit.com/python-interview-questions/
+
+## Minimal setup.py from setuptools docs
+
+https://setuptools.readthedocs.io/en/latest/setuptools.html#basic-use
+
+## Converter from py2 to py3
+
+https://docs.python.org/2/library/2to3.html
+
+## Popular packages, that may become useful:
+
+- AWS SDK https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+- For advanced datetime usage https://dateutil.readthedocs.io/en/stable/ and https://pypi.org/project/pytz/
+- Verifying SSL certs https://pypi.org/project/certifi/
+- Yaml parser https://pypi.org/project/PyYAML/
+- Guessing charsets https://pypi.org/project/chardet/
+- Json advanced parser https://pypi.org/project/jmespath/
+
+(From https://medium.com/better-programming/the-22-most-used-python-packages-in-the-world-7020a904b2e)
+
+## Popular django packages:
+
+- Cors headers https://pypi.org/project/django-cors-headers/
+- Django-filter provides a simple way to filter down a queryset based on parameters a user provides. https://django-filter.readthedocs.io/en/master/guide/usage.html
+- Redis https://pypi.org/project/django-redis/
+- Pytest https://pypi.org/project/pytest-django/
+- Storages, like S3 https://pypi.org/project/django-storages/
+- 
+
