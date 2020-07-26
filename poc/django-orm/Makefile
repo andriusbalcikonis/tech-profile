@@ -32,3 +32,12 @@ $(ENV)/.pip-install-done: $(ENV)/.virtual-env-created requirements.txt
 .PHONY: check
 check: $(ENV)/.pip-install-done
 	$(PYBIN)/flake8 queries
+
+.PHONY: test
+test: check
+	$(PYBIN)/python3 manage.py migrate
+	$(PYBIN)/python3 manage.py test
+
+.PHONY: makemigrations
+makemigrations: check
+	$(PYBIN)/python3 manage.py makemigrations
