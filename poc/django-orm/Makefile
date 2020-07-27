@@ -41,3 +41,7 @@ test: check
 .PHONY: makemigrations
 makemigrations: check
 	$(PYBIN)/python3 manage.py makemigrations
+
+.PHONY: cleardb
+cleardb: check
+	$(PYBIN)/python3 manage.py sqlflush | $(PYBIN)/python3 ./manage.py dbshell
