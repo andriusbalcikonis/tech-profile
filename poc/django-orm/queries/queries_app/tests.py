@@ -119,3 +119,34 @@ class QueriesTestCase(TestCase):
         """
         result = Player.objects.get(first_name="Arvydas", last_name="Sabonis")
         self.assertEqual(result.id, self.team2_player2.id)
+
+    def test_3_filter_operators(self):
+        """
+        Filter fields with __ operators
+        """
+        query = Player.objects.filter(first_name__startswith="A", height__gte=210)
+        result = list(query)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].last_name, "Sabonis")
+
+    def test_4_exclude(self):
+        """
+        .exclude in query excludes things
+        """
+        query = Player.objects.filter(first_name="Arvydas")
+        query = query.exclude(last_name="Sabonis")
+
+        result = list(query)
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].last_name, "Macijauskas")
+
+    def test_5_iexact(self):
+        """
+        __iexact is case insensitive exact
+        """
+        query = Player.objects.filter(first_name__iexact="ARVYDAS")
+
+        result = list(query)
+
+        self.assertEqual(len(result), 2)
