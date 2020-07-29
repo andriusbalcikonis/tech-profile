@@ -150,3 +150,14 @@ class QueriesTestCase(TestCase):
         result = list(query)
 
         self.assertEqual(len(result), 2)
+
+    def test_6_spanning_multiple_relationships(self):
+        """
+        Filter lookups can span multiple relationships
+        """
+        query = Team.objects.filter(contracts__player__first_name="Sarunas")
+
+        result = list(query)
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].name, "Lietuvos rinktine")
