@@ -102,11 +102,20 @@ class QueriesTestCase(TestCase):
         StatLine(game=self.game2, player=self.team2_player1, points=12, rebounds=3, assists=10).save()
         StatLine(game=self.game2, player=self.team2_player2, points=22, rebounds=23, assists=3).save()
         StatLine(game=self.game2, player=self.team2_player3, points=32, rebounds=0, assists=4).save()
+
     # Test methods:
 
-    def test_trivial_query(self):
-
+    def test_1_get_count(self):
+        """
+        For a warmup just get the count of players.
+        """
         query = Player.objects.all()
         results = list(query)
-
         self.assertEqual(len(results), 6)
+
+    def test_2_get_by_finding_one_record(self):
+        """
+        Get can work by finding by params
+        """
+        result = Player.objects.get(first_name="Arvydas", last_name="Sabonis")
+        self.assertEqual(result.id, self.team2_player2.id)
