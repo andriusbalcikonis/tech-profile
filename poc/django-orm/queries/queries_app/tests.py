@@ -1,5 +1,5 @@
 from datetime import date
-from django.db.models import F
+from django.db.models import F, Q
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
 
@@ -205,3 +205,12 @@ class QueriesTestCase(TestCase):
         query = StatLine.objects.filter(points=F('rebounds') * 4)
         result = list(query)
         self.assertEqual(len(result), 3)
+
+    def test_10_q_objects(self):
+        """
+        Q objects to have logical operators in filter
+        https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
+        """
+        query = Player.objects.filter(Q(first_name="Arvydas") | Q(last_name="Jasikevicius"))
+        result = list(query)
+        self.assertEqual(len(result), 2)
