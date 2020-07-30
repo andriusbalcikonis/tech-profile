@@ -1,4 +1,5 @@
 from datetime import date
+from django.db.models import F
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
 
@@ -161,3 +162,46 @@ class QueriesTestCase(TestCase):
 
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0].name, "Lietuvos rinktine")
+
+    def test_7_two_conditions_in_same_filter_or_in_separate(self):
+        """
+        Filter conditions in same filter expression or in separate
+        https://docs.djangoproject.com/en/3.0/topics/db/queries/#spanning-multi-valued-relationships
+        """
+
+        # Should be zero, as there is no player with both these conditions:
+        query = Team.objects.filter(
+            contracts__player__first_name="Sarunas",
+            contracts__player__last_name="Macijauskas",
+        )
+        result = list(query)
+        self.assertEqual(len(result), 0)
+
+        # Should be one team, as there is team with player named Sarunas
+        # ...and also with player named Macijauskas
+        query = Team.objects.filter(
+            contracts__player__first_name="Sarunas"
+        ).filter(
+            contracts__player__last_name="Macijauskas"
+        )
+        result = list(query)
+        self.assertEqual(len(result), 1)
+
+        self.assertEqual(result[0].name, "Lietuvos rinktine")
+
+    def test_8_f_expressions(self):
+        """
+        F expression lets to reference other fields (as opposed to providing values)
+        """
+        query = StatLine.objects.filter(points=F('rebounds'))
+        result = list(query)
+        self.assertEqual(len(result), 1)
+
+    def test_9_complex_f_expressions(self):
+        """
+        F expression can be complex
+        https://docs.djangoproject.com/en/3.0/topics/db/queries/#filters-can-reference-fields-on-the-model
+        """
+        query = StatLine.objects.filter(points=F('rebounds') * 4)
+        result = list(query)
+        self.assertEqual(len(result), 3)
