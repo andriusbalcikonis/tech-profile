@@ -230,3 +230,30 @@ class QueriesTestCase(TestCase):
         self.assertEqual(len(connection.queries), 0)
         Player.objects.get(first_name="Arvydas", last_name="Sabonis")
         self.assertEqual(len(connection.queries), 1)
+
+    def test_12_select_related(self):
+        """
+        "selct_related" will prefetch all related foreign key fields
+        """
+
+        # Two queries without "select_related":
+
+        reset_queries()
+        self.assertEqual(len(connection.queries), 0)
+
+        stats = list(StatLine.objects.filter(game__arena__name="Zalgirio arena"))
+        self.assertEqual(len(connection.queries), 1)
+
+        self.assertEqual(stats[0].player.first_name, "Rolandas")
+        self.assertEqual(len(connection.queries), 2)
+
+        # One query with "select_related":
+
+        reset_queries()
+        self.assertEqual(len(connection.queries), 0)
+
+        stats = list(StatLine.objects.select_related().filter(game__arena__name="Zalgirio arena"))
+        self.assertEqual(len(connection.queries), 1)
+
+        self.assertEqual(stats[0].player.first_name, "Rolandas")
+        self.assertEqual(len(connection.queries), 1)
