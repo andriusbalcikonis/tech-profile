@@ -1,4 +1,6 @@
 from datetime import date
+from django.conf import settings
+from django.db import connection, reset_queries
 from django.db.models import F, Q
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
@@ -9,6 +11,11 @@ class QueriesTestCase(TestCase):
     # Setup:
 
     def setUp(self):
+
+        # Tests set DEBUG to False by default. Need to be True for query profiling
+        # https://docs.djangoproject.com/en/3.0/faq/models/#how-can-i-see-the-raw-sql-queries-django-is-running
+
+        settings.DEBUG = True
 
         # Team1
 
@@ -214,3 +221,12 @@ class QueriesTestCase(TestCase):
         query = Player.objects.filter(Q(first_name="Arvydas") | Q(last_name="Jasikevicius"))
         result = list(query)
         self.assertEqual(len(result), 2)
+
+    def test_11_profile_db_queries(self):
+        """
+        Profiling what exact queries were executed
+        """
+        reset_queries()
+        self.assertEqual(len(connection.queries), 0)
+        Player.objects.get(first_name="Arvydas", last_name="Sabonis")
+        self.assertEqual(len(connection.queries), 1)
