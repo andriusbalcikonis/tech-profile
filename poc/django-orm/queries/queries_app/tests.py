@@ -257,3 +257,17 @@ class QueriesTestCase(TestCase):
 
         self.assertEqual(stats[0].player.first_name, "Rolandas")
         self.assertEqual(len(connection.queries), 1)
+
+    def test_13_explicit_naming_of_backward_relation(self):
+        """
+        Field name "game_stats" was explicitly given in the model StatLine field player
+        """
+        stat_line_count = self.team1_player1.game_stats.count()
+        self.assertEqual(stat_line_count, 2)
+
+    def test_14_default_naming_of_backward_relation(self):
+        """
+        See https://docs.djangoproject.com/en/3.0/topics/db/queries/#following-relationships-backward
+        """
+        stat_line_count = self.game1.statline_set.count()
+        self.assertEqual(stat_line_count, 6)

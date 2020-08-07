@@ -84,7 +84,7 @@ class Game(models.Model):
 
 class StatLine(models.Model):
 
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="stat_lines")
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="game_stats")
 
