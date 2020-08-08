@@ -1,7 +1,7 @@
 from datetime import date
 from django.conf import settings
 from django.db import connection, reset_queries
-from django.db.models import F, Q
+from django.db.models import Avg, Count, F, Q
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
 
@@ -271,3 +271,38 @@ class QueriesTestCase(TestCase):
         """
         stat_line_count = self.game1.statline_set.count()
         self.assertEqual(stat_line_count, 6)
+
+    def test_15_simple_aggregation(self):
+        """
+        Simple aggregation
+        """
+        stats = Player.objects.aggregate(avg=Avg('height'))
+        self.assertEqual(round(stats['avg']), 198.0)
+
+    def test_16_simple_annotation(self):
+        """
+        Simple annotation
+        """
+        team_heights = Team.objects.annotate(avg=Avg('contracts__player__height'))
+        self.assertEqual(round(team_heights[0].avg), 197.0)
+
+    def test_17_never_combine_agregates_in_annotations(self):
+        """
+        https://docs.djangoproject.com/en/3.0/topics/db/aggregation/#combining-multiple-aggregations
+        """
+        correct_hg_counts = Team.objects.annotate(count=Count('home_games'))
+        incorrect_counts = Team.objects.annotate(
+            count=Count('contracts'),
+            count_home_games=Count('home_games')
+        )
+        # Not the same:
+        self.assertNotEqual(correct_hg_counts[0].count, incorrect_counts[0].count_home_games)
+
+    def test_18_inner_filter_on_annotation_fields(self):
+        """
+        ..
+        """
+        team_count = Team.objects.annotate(player_count=Count(
+            'contracts__player')).filter(player_count__gt=1).count()
+        # Not the same:
+        self.assertEqual(team_count, 2)
