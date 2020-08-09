@@ -306,3 +306,59 @@ class QueriesTestCase(TestCase):
             'contracts__player')).filter(player_count__gt=1).count()
         # Not the same:
         self.assertEqual(team_count, 2)
+
+    def test_19_probably_pk_is_used_for_annotation_grouping_by_default(self):
+        """
+        ...
+        """
+        # If we check game stats per player the default way...
+        player_stats = Player.objects.annotate(count=Count('game_stats'))
+
+        # ...it will be 6 players
+        self.assertEqual(len(player_stats), 6)
+
+        # ..and each of them will have 2 games played
+        self.assertEqual(player_stats[0].count, 2)
+        self.assertEqual(player_stats[1].count, 2)
+        self.assertEqual(player_stats[2].count, 2)
+        self.assertEqual(player_stats[3].count, 2)
+        self.assertEqual(player_stats[4].count, 2)
+        self.assertEqual(player_stats[5].count, 2)
+
+    def test_20_values_are_used_for_annotation_grouping(self):
+        """
+        Values are used for annotation grouping
+        https://docs.djangoproject.com/en/3.0/topics/db/aggregation/#values
+        """
+
+        # If we check game stats while getting values('first_name')...
+        player_stats = Player.objects.values('first_name').annotate(count=Count('game_stats'))
+
+        # ...it will be 4 player names
+        self.assertEqual(len(player_stats), 4)
+
+        # ..then we'll get stats grouped by name
+        # and also we get a dict, not a model
+        self.assertEqual(player_stats[0].get('count'), 4)
+        self.assertEqual(player_stats[1].get('count'), 2)
+        self.assertEqual(player_stats[2].get('count'), 4)
+        self.assertEqual(player_stats[3].get('count'), 2)
+
+    def test_21_if_values_go_after_annotation_then_grouping_by_pk_again(self):
+        """
+        https://docs.djangoproject.com/en/3.0/topics/db/aggregation/#order-of-annotate-and-values-clauses
+        """
+
+        # If we check game stats per player the default way...
+        player_stats = Player.objects.annotate(count=Count('game_stats')).values('first_name', 'count').all()
+
+        # ...it will be 6 players
+        self.assertEqual(len(player_stats), 6)
+
+        # ..and each of them will have 2 games played
+        self.assertEqual(player_stats[0].get('count'), 2)
+        self.assertEqual(player_stats[1].get('count'), 2)
+        self.assertEqual(player_stats[2].get('count'), 2)
+        self.assertEqual(player_stats[3].get('count'), 2)
+        self.assertEqual(player_stats[4].get('count'), 2)
+        self.assertEqual(player_stats[5].get('count'), 2)
