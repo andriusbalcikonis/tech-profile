@@ -404,3 +404,52 @@ class QueriesTestCase(TestCase):
         self.assertEqual(teams[0].tallest_player_last_name, "Matulis")
         self.assertEqual(teams[1].name, "Lietuvos rinktine")
         self.assertEqual(teams[1].tallest_player_last_name, "Sabonis")
+
+    def test_25_slicing(self):
+        """
+        Taking first, taking Nth
+        https://books.agiliq.com/projects/django-orm-cookbook/en/latest/second_largest.html
+        """
+
+        # Try [0]
+        reset_queries()
+        tallest = Player.objects.order_by('-height')[0]
+        self.assertEqual(tallest.last_name, "Sabonis")
+        self.assertTrue('LIMIT 1' in connection.queries[0]['sql'])
+
+        # Try .first()
+        reset_queries()
+        tallest = Player.objects.order_by('-height').first()
+        self.assertEqual(tallest.last_name, "Sabonis")
+        self.assertTrue('LIMIT 1' in connection.queries[0]['sql'])
+
+        # Try .last()
+        reset_queries()
+        tallest = Player.objects.order_by('-height').last()
+        self.assertEqual(tallest.last_name, "Skaisgirys")
+        self.assertTrue('LIMIT 1' in connection.queries[0]['sql'])
+
+        # Try [2]
+        reset_queries()
+        tallest = Player.objects.order_by('-height')[2]
+        self.assertEqual(tallest.last_name, "Sinica")
+        self.assertTrue('LIMIT 1 OFFSET 2' in connection.queries[0]['sql'])
+
+    def test_26_find_duplicates(self):
+        """
+        https://books.agiliq.com/projects/django-orm-cookbook/en/latest/duplicate.html
+        """
+
+        reset_queries()
+        duplicates = Player.objects.values(
+            'first_name'
+        ).annotate(
+            name_count=Count('first_name')
+        ).filter(name_count__gt=1).all()
+
+        self.assertEqual(duplicates[0]['first_name'], "Arvydas")
+        self.assertEqual(duplicates[0]['name_count'], 2)
+        self.assertEqual(duplicates[1]['first_name'], "Rolandas")
+        self.assertEqual(duplicates[1]['name_count'], 2)
+
+        self.assertTrue('LIMIT 1 OFFSET 2' in connection.queries[0]['sql'])
