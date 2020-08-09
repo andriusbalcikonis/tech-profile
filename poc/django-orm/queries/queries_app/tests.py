@@ -1,7 +1,7 @@
 from datetime import date
 from django.conf import settings
 from django.db import connection, reset_queries
-from django.db.models import Avg, Count, F, Q
+from django.db.models import Avg, Count, F, Q, Subquery, OuterRef
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
 
@@ -362,3 +362,45 @@ class QueriesTestCase(TestCase):
         self.assertEqual(player_stats[3].get('count'), 2)
         self.assertEqual(player_stats[4].get('count'), 2)
         self.assertEqual(player_stats[5].get('count'), 2)
+
+    def test_22_q_objects_not_operator(self):
+        """
+        https://books.agiliq.com/projects/django-orm-cookbook/en/latest/notequal_query.html
+        """
+        query = Player.objects.filter(Q(first_name="Arvydas") & ~Q(last_name="Sabonis"))
+        result = list(query)
+        self.assertEqual(len(result), 1)
+
+    def test_23_queryset_union(self):
+        """
+        https://books.agiliq.com/projects/django-orm-cookbook/en/latest/union.html
+        """
+        query1 = Player.objects.filter(first_name="Arvydas")
+        query2 = Player.objects.filter(last_name="Sinica")
+        result = list(query1.union(query2))
+        self.assertEqual(len(result), 3)
+
+    def test_24_subquery(self):
+        """
+        Subqueries
+        https://books.agiliq.com/projects/django-orm-cookbook/en/latest/subquery.html
+        """
+
+        # Lets get teams with their tallest player
+
+        tallest_player_qs = Player.objects.filter(
+            contracts__team_id=OuterRef("pk")
+        ).order_by("-height")
+
+        qs = Team.objects.all().annotate(
+            tallest_player_last_name=Subquery(
+                tallest_player_qs.values('last_name')[:1]
+            )
+        )
+
+        teams = qs.all()
+
+        self.assertEqual(teams[0].name, "Sakalai")
+        self.assertEqual(teams[0].tallest_player_last_name, "Matulis")
+        self.assertEqual(teams[1].name, "Lietuvos rinktine")
+        self.assertEqual(teams[1].tallest_player_last_name, "Sabonis")
