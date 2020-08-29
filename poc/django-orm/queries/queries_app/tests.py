@@ -1,7 +1,7 @@
 from datetime import date
 from django.conf import settings
 from django.db import connection, reset_queries
-from django.db.models import Avg, Count, F, Q, Subquery, OuterRef
+from django.db.models import Avg, Case, Count, F, Q, Subquery, OuterRef, When
 from django.test import TestCase
 from queries.queries_app.models import Player, Team, Positions, Contract, Arena, Game, StatLine
 
@@ -451,3 +451,21 @@ class QueriesTestCase(TestCase):
         self.assertEqual(duplicates[0]['name_count'], 2)
         self.assertEqual(duplicates[1]['first_name'], "Rolandas")
         self.assertEqual(duplicates[1]['name_count'], 2)
+
+    def test_26_get_and_order_by_list_of_ids(self):
+        """
+        https://stackoverflow.com/a/37648265
+        """
+
+        list_of_ids = [
+            5, 1, 3, 2, 4
+        ]
+
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(list_of_ids)])
+        results = Player.objects.filter(pk__in=list_of_ids).order_by(preserved)
+
+        self.assertEqual(results[0].id, list_of_ids[0])
+        self.assertEqual(results[1].id, list_of_ids[1])
+        self.assertEqual(results[2].id, list_of_ids[2])
+        self.assertEqual(results[3].id, list_of_ids[3])
+        self.assertEqual(results[4].id, list_of_ids[4])
