@@ -62,5 +62,26 @@ https://docs.python.org/2/library/2to3.html
 - Redis https://pypi.org/project/django-redis/
 - Pytest https://pypi.org/project/pytest-django/
 - Storages, like S3 https://pypi.org/project/django-storages/
-- 
 
+## Factory class functions pattern
+
+Smth like this:
+
+```
+class Pizza:
+    def __init__(self, ingredients):
+        self.ingredients = ingredients
+
+    def __repr__(self):
+        return f'Pizza({self.ingredients!r})'
+
+    @classmethod
+    def margherita(cls):
+        return cls(['mozzarella', 'tomatoes'])
+
+    @classmethod
+    def prosciutto(cls):
+        return cls(['mozzarella', 'tomatoes', 'ham'])
+```
+
+See "Delicious Pizza Factories With @classmethod" in https://realpython.com/instance-class-and-static-methods-demystified/
