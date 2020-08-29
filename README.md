@@ -56,7 +56,7 @@ System analyst (2005-2007):
 |                      | `***` | Javascript (ES6)     | (in many POCs)                 | [Q&A: es6](q-a/es6)                                |
 |                      | `**`  | Typescript           |                                | [Q&A: typescript](q-a/typescript)                  |
 | App frameworks       | `***` | React + Flux/Redux   | [fullstack-1](poc/fullstack/1) |                                                    |
-|                      | `*`   | Vue+Vuex `P1`        |                                |                                                    |
+|                      | `*`   | Vue+Vuex             |                                |                                                    |
 | Libraries            | `**`  | jQuery               |                                |                                                    |
 |                      | `*`   | RxJS                 |                                |                                                    |
 | Tools                | `**`  | Webpack              | [fullstack-1](poc/fullstack/1) |                                                    |
@@ -69,15 +69,15 @@ System analyst (2005-2007):
 | Langauge             | `***` | Python               | (in many POCs)                 | Python: [Notes](notes/python.md) [Q&A](q-a/python) |
 | App frameworks       | `***` | Bottle               |                                |                                                    |
 |                      | `**`  | Flask                | [fullstack-1](poc/fullstack/1) |                                                    |
-|                      | `*`   | Django               |                                |                                                    |
+|                      | `**`  | Django               |                                |                                                    |
 | ORMs & migration     | `**`  | SqlAlchemy           | [fullstack-1](poc/fullstack/1) |                                                    |
-|                      | `*`   | Alembic `P2`         |                                |                                                    |
-|                      | `*`   | DjangoORM            |                                |                                                    |
+|                      | `*`   | Alembic              |                                |                                                    |
+|                      | `***` | DjangoORM            | [django-orm](poc/django-orm)   |                                                    |
 | REST API             | `*`   | FlaskRest            |                                |                                                    |
-|                      | `*`   | Schematics `P2`      |                                |                                                    |
+|                      | `*`   | Schematics           |                                |                                                    |
 |                      | `*`   | DjangoREST           |                                |                                                    |
-| GraphQL API          | `*`   | Graphene             |                                |                                                    |
-| Async tasks          | `*`   | Celery + RabbitMQ    | [fullstack-1](poc/fullstack/1) |                                                    |
+| GraphQL API          | `**`  | Graphene             |                                |                                                    |
+| Async tasks          | `**`  | Celery + RabbitMQ    | [fullstack-1](poc/fullstack/1) |                                                    |
 | Queue                | `*`   | pika + RabbitMQ      | [fullstack-1](poc/fullstack/1) |                                                    |
 | Web server setup     | `**`  | nginx + uwsgi        | [uwsgi-nginx](poc/uwsgi-nginx) | [Q&A: rev-proxy](q-a/rev-proxy)                    |
 | **BACKEND (.NET)**   |       |                      |                                |                                                    |
@@ -107,7 +107,7 @@ System analyst (2005-2007):
 | **DEVOPS**           |       |                      |                                |                                                    |
 | Tools                | `**`  | Docker               | (in many POCs)                 | [Notes: docker](notes/docker.md)                   |
 |                      | `**`  | Docker-compose       | (in many POCs)                 | [Notes: docker](notes/docker.md)                   |
-|                      | `*`   | Helm `P2`            |                                |                                                    |
+|                      | `*`   | Helm                 |                                |                                                    |
 |                      | `**`  | Kubernetes           |                                | [Notes: kubectl](notes/kubectl.md)                 |
 |                      | `**`  | Bash                 |                                | [Notes: bash](notes/bash.md)                       |
 | CI/CD systems        | `***` | GitLab CI            |                                |                                                    |
@@ -126,7 +126,6 @@ Notation:
 - `***` I know it well, no additional studying would be needed (studied in detail / used in real projects recently)
 - `**` Some studying/refreshing may be needed (studied it / used in real projects a while ago)
 - `*` Studying would be needed (I know _why_ and _when_ it should be used, but not much about the details of _how_)
-- `PN` TODO to study more with prio N
 
 ## Best practices
 
