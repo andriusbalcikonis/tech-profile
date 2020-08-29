@@ -451,5 +451,3 @@ class QueriesTestCase(TestCase):
         self.assertEqual(duplicates[0]['name_count'], 2)
         self.assertEqual(duplicates[1]['first_name'], "Rolandas")
         self.assertEqual(duplicates[1]['name_count'], 2)
-
-        self.assertTrue('LIMIT 1 OFFSET 2' in connection.queries[0]['sql'])
