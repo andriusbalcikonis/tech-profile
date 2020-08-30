@@ -92,5 +92,6 @@ See "Delicious Pizza Factories With @classmethod" in https://realpython.com/inst
 - Coroutines are consumers of data
 - To keep your brain from exploding, you don't mix the two concepts together
 - `yield from ...` is best used to "feed" from generator to coroutine
+  https://stackoverflow.com/a/26109157
 
 Informative & well-written slides about that: http://dabeaz.com/coroutines/Coroutines.pdf
