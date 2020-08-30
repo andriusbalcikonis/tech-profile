@@ -85,3 +85,12 @@ class Pizza:
 ```
 
 See "Delicious Pizza Factories With @classmethod" in https://realpython.com/instance-class-and-static-methods-demystified/
+
+## Python coroutines is an interesting concept
+
+- Generators produce data for iteration
+- Coroutines are consumers of data
+- To keep your brain from exploding, you don't mix the two concepts together
+- `yield from ...` is best used to "feed" from generator to coroutine
+
+Informative & well-written slides about that: http://dabeaz.com/coroutines/Coroutines.pdf
