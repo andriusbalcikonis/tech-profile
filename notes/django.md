@@ -27,3 +27,10 @@ See:
 If you need smth to be ordered randomly, use `.order_by('?')`
 
 https://books.agiliq.com/projects/django-orm-cookbook/en/latest/random.html
+
+# Tip:
+
+Transactions can be controlled with `@transaction.atomic` decorator or `with transaction.atomic():`
+ctx manager.
+
+https://docs.djangoproject.com/en/3.1/topics/db/transactions/#controlling-transactions-explicitly
